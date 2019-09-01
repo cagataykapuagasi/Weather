@@ -3,7 +3,7 @@ const weatherRoute = require("./routes/weather");
 const port = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
-  console.log(`${req.path} path ${req.method} method called`);
+  console.log(`path: ${req.path} method: ${req.method}`);
   next();
 });
 
@@ -14,5 +14,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`localhost:${port} -> üzerinden apiye ulaşabilirsiniz !!! `);
+  console.log(`Port: ${port}`);
 });
