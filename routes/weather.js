@@ -1,12 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const request = require("request");
 
-router.get("/", (req, res) => {
-  res.send("weather oldu");
-});
-
-router.post("/", (req, res) => {
-  res.send("post weather oldu");
+router.get("/:name?", (req, res) => {
+  request(
+    `https://api.weatherbit.io/v2.0/current?city=${req.path},tr&key=e5908d73d226497e9c8cc70d970e2f6a`,
+    (error, response, body) => {
+      if (error) {
+        res.send(error);
+        return;
+      }
+      if (response.statusCode === 204) {
+        res.send("Please send city param");
+        return;
+      }
+      res.send(response);
+    }
+  );
 });
 
 module.exports = router;
